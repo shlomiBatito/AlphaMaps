@@ -69,6 +69,9 @@ export default {
           geometry: new Point([this.events[i][j].lon, this.events[i][j].lat]),
         });
 
+         this.events[i][j].date = this.formatDate(this.events[i][j].date);
+        if(this.events[i][j].report_date) this.formatDate(this.events[i][j].report_date);
+
         iconFeature.setStyle(iconStyle);
         iconFeature.details = this.events[i][j];
 
@@ -86,6 +89,10 @@ export default {
         map: this.map
       });
       }); 
+    },
+    formatDate(date) {
+      date = new Date(date);
+      return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
     },
     isFeatureExist(evt) {
       const clickLocation = evt.coordinate;
